@@ -1,0 +1,3053 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>WYRD — Premium Digital Products</title>
+  <meta name="description" content="WYRD — Elevate your digital experience. Premium products, crafted for professionals." />
+  <meta name="theme-color" content="#1a0a0e" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+       ============================================================ */
+    :root {
+      --burgundy-950: #0a0305;
+      --burgundy-900: #1a0a0e;
+      --burgundy-850: #210c12;
+      --burgundy-800: #2d1017;
+      --burgundy-700: #4a1822;
+      --burgundy-600: #6b1f2e;
+      --burgundy-500: #8b2639;
+      --burgundy-400: #b83248;
+      --burgundy-300: #d94f64;
+      --burgundy-200: #f08a99;
+      --burgundy-100: #fbc5cd;
+
+      --neutral-950: #08080a;
+      --neutral-900: #111114;
+      --neutral-850: #17171b;
+      --neutral-800: #1e1e24;
+      --neutral-700: #2a2a32;
+      --neutral-600: #3d3d47;
+      --neutral-500: #5c5c6a;
+      --neutral-400: #8a8a99;
+      --neutral-300: #b0b0be;
+      --neutral-200: #d4d4de;
+      --neutral-100: #eeeef3;
+
+      --bg-primary: var(--burgundy-950);
+      --bg-secondary: var(--burgundy-900);
+      --bg-card: rgba(32, 14, 20, 0.55);
+      --bg-card-hover: rgba(42, 18, 26, 0.75);
+      --bg-input: rgba(48, 18, 26, 0.55);
+
+      --text-primary: var(--neutral-100);
+      --text-secondary: var(--neutral-400);
+      --text-tertiary: var(--neutral-500);
+      --text-accent: var(--burgundy-300);
+
+      --border-subtle: rgba(139, 38, 57, 0.16);
+      --border-card: rgba(139, 38, 57, 0.20);
+      --border-active: rgba(217, 79, 100, 0.45);
+
+      --accent-gradient: linear-gradient(135deg, #d94f64 0%, #b83248 50%, #8b2639 100%);
+      --accent-glow: 0 0 32px rgba(184, 50, 72, 0.28);
+
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 26px;
+      --radius-pill: 999px;
+
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
+      --shadow-elevated: 0 12px 48px rgba(0, 0, 0, 0.5);
+      --shadow-dialog: 0 24px 80px rgba(0, 0, 0, 0.6);
+
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-spring: 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100dvh;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 0%, rgba(184, 50, 72, 0.10), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 100%, rgba(107, 31, 46, 0.10), transparent 60%),
+        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(217, 79, 100, 0.04), transparent 70%);
+    }
+
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-orb--1 {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(184, 50, 72, 0.5), transparent 70%);
+      top: -160px; right: -120px;
+      animation: orbFloat1 18s ease-in-out infinite;
+    }
+    .ambient-orb--2 {
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(107, 31, 46, 0.45), transparent 70%);
+      bottom: 10%; left: -140px;
+      animation: orbFloat2 22s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 40px) scale(1.1); }
+    }
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -30px) scale(1.08); }
+    }
+
+    /* ============================================================
+       APP SHELL
+       ============================================================ */
+    .app {
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 0 16px 48px;
+      padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 4px 14px;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .brand__icon-wrap {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      border-radius: var(--radius-md);
+      padding: 1.5px;
+      background: conic-gradient(from 0deg,
+        var(--burgundy-400),
+        var(--burgundy-600) 25%,
+        var(--burgundy-300) 50%,
+        var(--burgundy-500) 75%,
+        var(--burgundy-400) 100%);
+      box-shadow:
+        0 4px 18px rgba(184, 50, 72, 0.35),
+        0 0 28px rgba(217, 79, 100, 0.15);
+      animation: logoRotate 8s linear infinite;
+    }
+    @keyframes logoRotate { to { transform: rotate(360deg); } }
+
+    .brand__icon {
+      width: 100%;
+      height: 100%;
+      border-radius: calc(var(--radius-md) - 1.5px);
+      object-fit: cover;
+      display: block;
+      background: var(--burgundy-900);
+      animation: logoRotateReverse 8s linear infinite;
+    }
+    @keyframes logoRotateReverse { to { transform: rotate(-360deg); } }
+
+    .brand__text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .brand__name {
+      font-size: 1.375rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      filter: drop-shadow(0 0 12px rgba(217, 79, 100, 0.25));
+    }
+
+    .brand__tagline {
+      font-size: 0.625rem;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      -webkit-tap-highlight-color: transparent;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .icon-btn:hover, .icon-btn:focus-visible {
+      background: var(--bg-card-hover);
+      border-color: var(--border-active);
+      color: var(--text-accent);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(184, 50, 72, 0.2);
+    }
+    .icon-btn:active { transform: scale(0.94); }
+    .icon-btn i { width: 18px; height: 18px; }
+
+    .icon-btn.has-indicator::after {
+      content: '';
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--burgundy-300);
+      border: 1.5px solid var(--bg-primary);
+      box-shadow: 0 0 8px rgba(217, 79, 100, 0.8);
+    }
+
+    /* ============================================================
+       SECTION HEADINGS
+       ============================================================ */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 26px 8px 10px;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+    .section-label i { width: 14px; height: 14px; color: var(--burgundy-400); }
+    .section-label__line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-subtle), transparent);
+      margin-left: 6px;
+    }
+
+    /* ============================================================
+       GROUPED CARD (iOS Settings pattern)
+       ============================================================ */
+    .group-card {
+      position: relative;
+      background: var(--bg-card);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+    }
+    .group-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(217, 79, 100, 0.2), transparent);
+      pointer-events: none;
+    }
+    .group-card:hover {
+      border-color: rgba(217, 79, 100, 0.28);
+      box-shadow: var(--shadow-card), 0 0 0 1px rgba(217, 79, 100, 0.06);
+    }
+
+    .group-card + .group-card {
+      margin-top: 14px;
+    }
+
+    /* ============================================================
+       PRODUCT ROW
+       ============================================================ */
+    .product-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 16px;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .product-row:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 72px;
+      right: 16px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-subtle), transparent);
+    }
+    .product-row:hover { background: rgba(139, 38, 57, 0.09); }
+    .product-row:active { background: rgba(139, 38, 57, 0.14); }
+
+    .product-row__icon {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      border: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+      background: var(--bg-input);
+      transition: border-color var(--transition-fast), transform var(--transition-fast);
+    }
+    .product-row:hover .product-row__icon {
+      border-color: var(--border-active);
+      transform: scale(1.03);
+    }
+
+    .product-row__body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .product-row__top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .product-row__name {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .product-row__desc {
+      font-size: 0.8125rem;
+      color: var(--text-tertiary);
+      margin-top: 3px;
+      line-height: 1.45;
+    }
+
+    .product-row__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .product-row__price {
+      font-size: 0.9375rem;
+      font-weight: 800;
+      color: var(--text-accent);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.005em;
+    }
+
+    .product-row__price small {
+      font-size: 0.6875rem;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      margin-left: 5px;
+      letter-spacing: 0;
+    }
+
+    /* ============================================================
+       TIER ICON (replaces level bars)
+       ============================================================ */
+    .tier-icon {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      flex-shrink: 0;
+      border: 1px solid var(--border-subtle);
+      transition: all var(--transition-fast);
+      cursor: default;
+    }
+    .tier-icon i {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2;
+    }
+
+    /* Lite — soft, minimal silver */
+    .tier-icon[data-tier="lite"] {
+      color: var(--burgundy-300);
+      background: rgba(217, 79, 100, 0.18);
+      border-color: rgba(217, 79, 100, 0.40);
+      box-shadow: 0 0 12px rgba(217, 79, 100, 0.25);
+    }
+
+    /* Standar — burgundy soft */
+    .tier-icon[data-tier="standar"] {
+      color: var(--burgundy-300);
+      background: rgba(217, 79, 100, 0.18);
+      border-color: rgba(217, 79, 100, 0.40);
+      box-shadow: 0 0 12px rgba(217, 79, 100, 0.25);
+    }
+
+    /* Medium — burgundy medium */
+    .tier-icon[data-tier="medium"] {
+      color: var(--burgundy-300);
+      background: rgba(217, 79, 100, 0.18);
+      border-color: rgba(217, 79, 100, 0.40);
+      box-shadow: 0 0 12px rgba(217, 79, 100, 0.25);
+    }
+
+    /* Hard — burgundy intense with glow */
+    .tier-icon[data-tier="hard"] {
+      color: var(--burgundy-300);
+      background: rgba(217, 79, 100, 0.18);
+      border-color: rgba(217, 79, 100, 0.40);
+      box-shadow: 0 0 12px rgba(217, 79, 100, 0.25);
+    }
+
+    .product-row:hover .tier-icon {
+      transform: scale(1.08);
+    }
+
+    /* ============================================================
+       ENHANCED PROMO BADGE
+       ============================================================ */
+    .promo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 11px 4px 9px;
+      border-radius: var(--radius-pill);
+      font-size: 0.5625rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(110deg, #ff4067 0%, #d90429 30%, #b83248 60%, #ff5577 100%);
+      background-size: 250% 100%;
+      color: #fff;
+      box-shadow:
+        0 4px 16px rgba(217, 4, 41, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+      animation: promoGradient 4s ease-in-out infinite, badgePulse 2.6s ease-in-out infinite;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .promo-badge i {
+      width: 11px;
+      height: 11px;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.6));
+    }
+    .promo-badge::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: skewX(-20deg);
+      animation: promoShimmer 3.5s ease-in-out infinite;
+    }
+    @keyframes promoGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    @keyframes promoShimmer {
+      0% { left: -100%; }
+      55%, 100% { left: 130%; }
+    }
+    @keyframes badgePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.965); opacity: 0.92; }
+    }
+
+    .promo-expiry {
+      font-size: 0.625rem;
+      color: var(--text-tertiary);
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .promo-expiry i { width: 11px; height: 11px; color: var(--burgundy-400); }
+
+    .promo-countdown {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(217, 79, 100, 0.12);
+      border: 1px solid rgba(217, 79, 100, 0.22);
+      font-size: 0.5625rem;
+      font-weight: 700;
+      color: var(--burgundy-200);
+      letter-spacing: 0.02em;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .product-row__chevron {
+      width: 18px;
+      height: 18px;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+      margin-top: 14px;
+      transition: transform var(--transition-fast), color var(--transition-fast);
+    }
+    .product-row:hover .product-row__chevron {
+      transform: translateX(2px);
+      color: var(--text-accent);
+    }
+
+    /* ============================================================
+       NAV ROW (links)
+       ============================================================ */
+    .nav-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 16px;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-row:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 66px;
+      right: 16px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-subtle), transparent);
+    }
+    .nav-row:hover { background: rgba(139, 38, 57, 0.09); }
+    .nav-row:active { background: rgba(139, 38, 57, 0.14); }
+
+    .nav-row__icon-wrap {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      background: rgba(139, 38, 57, 0.14);
+      border: 1px solid var(--border-subtle);
+      color: var(--burgundy-300);
+      transition: all var(--transition-fast);
+    }
+    .nav-row:hover .nav-row__icon-wrap {
+      background: rgba(184, 50, 72, 0.2);
+      border-color: var(--border-active);
+      transform: scale(1.05);
+    }
+    .nav-row__icon-wrap i { width: 17px; height: 17px; }
+
+    .nav-row__label {
+      flex: 1;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .nav-row__chevron {
+      width: 17px;
+      height: 17px;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+      transition: transform var(--transition-fast), color var(--transition-fast);
+    }
+    .nav-row:hover .nav-row__chevron {
+      transform: translateX(2px);
+      color: var(--text-accent);
+    }
+
+    /* ============================================================
+       INFO CARD
+       ============================================================ */
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 16px;
+      position: relative;
+    }
+    .info-row:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 66px;
+      right: 16px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-subtle), transparent);
+    }
+
+    .info-row__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      border: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+      background: var(--bg-input);
+    }
+
+    .info-row__label {
+      flex: 1;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .info-row__value {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: right;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .app-footer {
+      text-align: center;
+      padding: 36px 16px 12px;
+    }
+    .app-footer__line {
+      font-size: 0.6875rem;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+    }
+    .app-footer__brand {
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      color: var(--burgundy-400);
+    }
+
+    /* ============================================================
+       DIALOG
+       ============================================================ */
+    .dialog-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+      background: rgba(5, 2, 3, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
+    }
+    .dialog-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .dialog {
+      width: 100%;
+      max-width: 520px;
+      max-height: 88dvh;
+      background: linear-gradient(180deg, var(--burgundy-900) 0%, var(--burgundy-950) 100%);
+      border: 1px solid var(--border-card);
+      border-bottom: none;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      box-shadow: var(--shadow-dialog);
+      transform: translateY(100%);
+      transition: transform var(--transition-spring);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .dialog-overlay.is-open .dialog {
+      transform: translateY(0);
+    }
+
+    .dialog__grabber {
+      width: 42px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--neutral-600);
+      margin: 10px auto 4px;
+      flex-shrink: 0;
+      transition: background var(--transition-fast);
+    }
+    .dialog-overlay.is-open .dialog__grabber {
+      background: var(--burgundy-500);
+    }
+
+    .dialog__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 20px 16px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .dialog__header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+      right: 20px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+    }
+
+    .dialog__title {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .dialog__close {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .dialog__close:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-accent);
+      border-color: var(--border-active);
+      transform: rotate(90deg);
+    }
+    .dialog__close i { width: 16px; height: 16px; }
+
+    .dialog__body {
+      overflow-y: auto;
+      padding: 16px 16px 24px;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Dialog search */
+    .dialog-search {
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .dialog-search i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: var(--text-tertiary);
+      pointer-events: none;
+      transition: color var(--transition-fast);
+    }
+    .dialog-search:focus-within i { color: var(--burgundy-300); }
+    .dialog-search input {
+      width: 100%;
+      padding: 12px 14px 12px 40px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-card);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .dialog-search input:focus {
+      border-color: var(--border-active);
+      box-shadow: 0 0 0 3px rgba(217, 79, 100, 0.08);
+    }
+    .dialog-search input::placeholder { color: var(--text-tertiary); }
+
+    /* Currency / Language list */
+    .currency-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .currency-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all var(--transition-fast);
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+    }
+    .currency-option::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      bottom: 20%;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--burgundy-400);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+    .currency-option:hover {
+      background: var(--bg-card);
+      border-color: var(--border-subtle);
+    }
+    .currency-option.is-selected {
+      background: rgba(139, 38, 57, 0.16);
+      border-color: var(--border-active);
+    }
+    .currency-option.is-selected::before { opacity: 1; }
+
+    .currency-option__flag {
+      font-size: 1.25rem;
+      line-height: 1;
+      width: 28px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .currency-option__code {
+      font-size: 0.8125rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: 0.04em;
+      min-width: 44px;
+    }
+
+    .currency-option__name {
+      flex: 1;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+
+    .currency-option__rate {
+      font-size: 0.6875rem;
+      color: var(--text-tertiary);
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+    }
+
+    .currency-option__check {
+      width: 18px;
+      height: 18px;
+      color: var(--burgundy-300);
+      opacity: 0;
+      flex-shrink: 0;
+      transition: opacity var(--transition-fast);
+    }
+    .currency-option.is-selected .currency-option__check { opacity: 1; }
+
+    /* Language option */
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all var(--transition-fast);
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .lang-option::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      bottom: 20%;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--burgundy-400);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+    .lang-option:hover {
+      background: var(--bg-card);
+      border-color: var(--border-subtle);
+    }
+    .lang-option.is-selected {
+      background: rgba(139, 38, 57, 0.16);
+      border-color: var(--border-active);
+    }
+    .lang-option.is-selected::before { opacity: 1; }
+
+    .lang-option__flag {
+      font-size: 1.5rem;
+      width: 32px;
+      text-align: center;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .lang-option__name {
+      flex: 1;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .lang-option__code {
+      font-size: 0.6875rem;
+      color: var(--text-tertiary);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(139, 38, 57, 0.1);
+      border: 1px solid var(--border-subtle);
+    }
+    .lang-option__check {
+      width: 18px;
+      height: 18px;
+      color: var(--burgundy-300);
+      opacity: 0;
+      flex-shrink: 0;
+      transition: opacity var(--transition-fast);
+    }
+    .lang-option.is-selected .lang-option__check { opacity: 1; }
+
+    /* Dialog status bar */
+    .dialog-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 14px;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+    }
+    .dialog-status i { width: 14px; height: 14px; flex-shrink: 0; }
+    .dialog-status.is-live { color: var(--burgundy-200); border-color: rgba(217, 79, 100, 0.2); }
+    .dialog-status.is-error { color: var(--burgundy-300); border-color: rgba(217, 79, 100, 0.3); }
+
+    .dialog-status__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--burgundy-300);
+      animation: dotPulse 1.6s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Rate reference */
+    .rate-ref {
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(139, 38, 57, 0.14), rgba(45, 16, 23, 0.2));
+      border: 1px solid var(--border-subtle);
+      margin-top: 16px;
+    }
+    .rate-ref__label {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rate-ref__label i { width: 13px; height: 13px; color: var(--burgundy-400); }
+    .rate-ref__value {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+    .rate-ref__sub {
+      font-size: 0.6875rem;
+      color: var(--text-tertiary);
+      margin-top: 5px;
+    }
+
+    /* Skeleton */
+    .skeleton-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+    }
+    .skeleton-row__circle {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--neutral-800);
+      animation: shimmer 1.4s ease-in-out infinite;
+    }
+    .skeleton-row__lines { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .skeleton-row__line {
+      height: 10px;
+      border-radius: 4px;
+      background: var(--neutral-800);
+      animation: shimmer 1.4s ease-in-out infinite;
+    }
+    .skeleton-row__line--short { width: 40%; }
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    /* ============================================================
+       TOAST
+       ============================================================ */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: var(--radius-pill);
+      background: var(--burgundy-800);
+      border: 1px solid var(--border-active);
+      color: var(--text-primary);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-elevated), 0 0 24px rgba(184, 50, 72, 0.2);
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-smooth);
+      white-space: nowrap;
+    }
+    .toast.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast i { width: 16px; height: 16px; color: var(--burgundy-300); }
+
+    /* ============================================================
+       PURCHASE MODAL
+       ============================================================ */
+    .purchase-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(5, 2, 3, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
+    }
+    .purchase-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .purchase-modal {
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(180deg, var(--burgundy-900) 0%, var(--burgundy-950) 100%);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-dialog);
+      padding: 24px;
+      transform: scale(0.92) translateY(10px);
+      transition: transform var(--transition-spring);
+      position: relative;
+      overflow: hidden;
+    }
+    .purchase-modal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      opacity: 0.8;
+    }
+    .purchase-overlay.is-open .purchase-modal {
+      transform: scale(1) translateY(0);
+    }
+
+    .purchase-modal__icon {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 16px;
+      background: var(--bg-input);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .purchase-modal__title {
+      font-size: 1.0625rem;
+      font-weight: 800;
+      margin-bottom: 2px;
+      letter-spacing: 0.01em;
+    }
+
+    .purchase-modal__product {
+      font-size: 0.8125rem;
+      color: var(--text-tertiary);
+      margin-bottom: 14px;
+    }
+
+    .purchase-modal__price {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--text-accent);
+      margin-bottom: 20px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+      filter: drop-shadow(0 0 12px rgba(217, 79, 100, 0.2));
+    }
+
+    .purchase-modal__label {
+      display: block;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+
+    .purchase-modal__input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-card);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      margin-bottom: 18px;
+    }
+    .purchase-modal__input:focus {
+      border-color: var(--border-active);
+      box-shadow: 0 0 0 3px rgba(217, 79, 100, 0.08);
+    }
+    .purchase-modal__input::placeholder { color: var(--text-tertiary); }
+
+    .purchase-modal__actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 18px;
+      border-radius: var(--radius-md);
+      border: none;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn i { width: 16px; height: 16px; }
+
+    .btn--ghost {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+    .btn--ghost:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-primary);
+      border-color: var(--border-active);
+    }
+
+    .btn--primary {
+      background: var(--accent-gradient);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(184, 50, 72, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn--primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent 50%);
+      pointer-events: none;
+    }
+    .btn--primary:hover {
+      box-shadow: 0 6px 26px rgba(184, 50, 72, 0.55);
+      transform: translateY(-1px);
+    }
+    .btn--primary:active { transform: translateY(0) scale(0.98); }
+    .btn--primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 380px) {
+      .app { padding-left: 12px; padding-right: 12px; }
+      .product-row { padding: 16px 13px; }
+      .product-row__icon { width: 42px; height: 42px; }
+      .brand__icon-wrap { width: 46px; height: 46px; }
+      .brand__name { font-size: 1.1875rem; }
+    }
+
+    @media (min-width: 600px) {
+      .app { padding-top: 32px; }
+      .dialog-overlay { align-items: center; padding: 24px; }
+      .dialog {
+        border-radius: var(--radius-xl);
+        max-height: 80dvh;
+        border-bottom: 1px solid var(--border-card);
+      }
+      .dialog__grabber { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .brand__icon-wrap, .brand__icon { animation: none; }
+    }
+
+    .dialog__body::-webkit-scrollbar { width: 4px; }
+    .dialog__body::-webkit-scrollbar-track { background: transparent; }
+    .dialog__body::-webkit-scrollbar-thumb {
+      background: var(--neutral-700);
+      border-radius: 2px;
+    }
+    .dialog__body::-webkit-scrollbar-thumb:hover {
+      background: var(--burgundy-600);
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+  <div class="ambient-orb ambient-orb--1" aria-hidden="true"></div>
+  <div class="ambient-orb ambient-orb--2" aria-hidden="true"></div>
+
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="app-header">
+      <a class="brand" href="#" aria-label="WYRD Home">
+        <div class="brand__icon-wrap">
+          <img
+            class="brand__icon"
+            src="https://ganga--link--ghhzdp9sv8hk.code.run/i/y6k38a6ouh"
+            alt="WYRD Logo"
+            width="52" height="52"
+            loading="eager"
+            onerror="this.style.background='linear-gradient(135deg,#b83248,#6b1f2e)';this.removeAttribute('src');"
+          />
+        </div>
+        <div class="brand__text">
+          <span class="brand__name">WYRD</span>
+          <span class="brand__tagline" data-i18n="tagline">Performance Enhancement Tool</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <button class="icon-btn" id="btnLanguage" aria-label="Change language" title="Language">
+          <i data-lucide="languages"></i>
+        </button>
+        <button class="icon-btn" id="btnCurrency" aria-label="Change currency" title="Currency">
+          <i data-lucide="globe"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- PRODUCTS -->
+    <div class="section-label">
+      <i data-lucide="package"></i>
+      <span data-i18n="section_products">Products</span>
+      <div class="section-label__line"></div>
+    </div>
+
+    <div class="group-card" id="productGroup">
+
+      <!-- WYRD LITE -->
+      <div class="product-row" data-product="lite" role="button" tabindex="0"
+           aria-label="WYRD LITE, Rp40.000">
+        <img class="product-row__icon"
+             src="https://ganga--link--ghhzdp9sv8hk.code.run/i/y6k38a6ouh"
+             alt="WYRD LITE" width="46" height="46" loading="lazy"
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2246%22 height=%2246%22%3E%3Crect width=%2246%22 height=%2246%22 rx=%2214%22 fill=%22%232d1017%22/%3E%3C/svg%3E'" />
+        <div class="product-row__body">
+          <div class="product-row__top">
+            <span class="product-row__name">WYRD LITE</span>
+            <span class="promo-badge" data-promo="lite" hidden>
+              <i data-lucide="zap"></i> 11.11
+            </span>
+          </div>
+          <div class="product-row__desc" data-i18n="desc_lite">Low performance power. 25%.</div>
+          <div class="product-row__meta">
+            <div class="product-row__price" data-base-price="40000">Rp40.000</div>
+            <span class="tier-icon" data-tier="lite" title="Lite" aria-label="Lite">
+              <i data-lucide="feather"></i>
+            </span>
+          </div>
+          <div class="promo-expiry" data-expiry="lite" hidden>
+            <i data-lucide="calendar-clock"></i>
+            <span></span>
+            <span class="promo-countdown" data-countdown="lite"></span>
+          </div>
+        </div>
+        <i data-lucide="chevron-right" class="product-row__chevron"></i>
+      </div>
+
+      <!-- WYRD STANDAR -->
+      <div class="product-row" data-product="standar" role="button" tabindex="0"
+           aria-label="WYRD STANDAR, Rp60.000">
+        <img class="product-row__icon"
+             src="https://ganga--link--ghhzdp9sv8hk.code.run/i/y6k38a6ouh"
+             alt="WYRD STANDAR" width="46" height="46" loading="lazy"
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2246%22 height=%2246%22%3E%3Crect width=%2246%22 height=%2246%22 rx=%2214%22 fill=%22%232d1017%22/%3E%3C/svg%3E'" />
+        <div class="product-row__body">
+          <div class="product-row__top">
+            <span class="product-row__name">WYRD STANDAR</span>
+            <span class="promo-badge" data-promo="standar" hidden>
+              <i data-lucide="zap"></i> 12.12
+            </span>
+          </div>
+          <div class="product-row__desc" data-i18n="desc_standar">Medium performance power. 40%.</div>
+          <div class="product-row__meta">
+            <div class="product-row__price" data-base-price="60000">Rp60.000</div>
+            <span class="tier-icon" data-tier="standar" title="Standar" aria-label="Standar">
+              <i data-lucide="zap"></i>
+            </span>
+          </div>
+          <div class="promo-expiry" data-expiry="standar" hidden>
+            <i data-lucide="calendar-clock"></i>
+            <span></span>
+            <span class="promo-countdown" data-countdown="standar"></span>
+          </div>
+        </div>
+        <i data-lucide="chevron-right" class="product-row__chevron"></i>
+      </div>
+
+      <!-- WYRD MEDIUM -->
+      <div class="product-row" data-product="medium" role="button" tabindex="0"
+           aria-label="WYRD MEDIUM, Rp140.000">
+        <img class="product-row__icon"
+             src="https://ganga--link--ghhzdp9sv8hk.code.run/i/y6k38a6ouh"
+             alt="WYRD MEDIUM" width="46" height="46" loading="lazy"
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2246%22 height=%2246%22%3E%3Crect width=%2246%22 height=%2246%22 rx=%2214%22 fill=%22%232d1017%22/%3E%3C/svg%3E'" />
+        <div class="product-row__body">
+          <div class="product-row__top">
+            <span class="product-row__name">WYRD MEDIUM</span>
+            <span class="promo-badge" data-promo="medium" hidden>
+              <i data-lucide="zap"></i> 11.11
+            </span>
+          </div>
+          <div class="product-row__desc" data-i18n="desc_medium">High performance power. 70%.</div>
+          <div class="product-row__meta">
+            <div class="product-row__price" data-base-price="140000">Rp140.000</div>
+            <span class="tier-icon" data-tier="medium" title="Medium" aria-label="Medium">
+              <i data-lucide="flame"></i>
+            </span>
+          </div>
+          <div class="promo-expiry" data-expiry="medium" hidden>
+            <i data-lucide="calendar-clock"></i>
+            <span></span>
+            <span class="promo-countdown" data-countdown="medium"></span>
+          </div>
+        </div>
+        <i data-lucide="chevron-right" class="product-row__chevron"></i>
+      </div>
+
+      <!-- WYRD HARD -->
+      <div class="product-row" data-product="hard" role="button" tabindex="0"
+           aria-label="WYRD HARD, Rp200.000">
+        <img class="product-row__icon"
+             src="https://ganga--link--ghhzdp9sv8hk.code.run/i/y6k38a6ouh"
+             alt="WYRD HARD" width="46" height="46" loading="lazy"
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2246%22 height=%2246%22%3E%3Crect width=%2246%22 height=%2246%22 rx=%2214%22 fill=%22%232d1017%22/%3E%3C/svg%3E'" />
+        <div class="product-row__body">
+          <div class="product-row__top">
+            <span class="product-row__name">WYRD HARD</span>
+            <span class="promo-badge" data-promo="hard" hidden>
+              <i data-lucide="zap"></i> 12.12
+            </span>
+          </div>
+          <div class="product-row__desc" data-i18n="desc_hard">Maximum performance power. 95%.</div>
+          <div class="product-row__meta">
+            <div class="product-row__price" data-base-price="200000">Rp200.000</div>
+            <span class="tier-icon" data-tier="hard" title="Hard" aria-label="Hard">
+              <i data-lucide="crown"></i>
+            </span>
+          </div>
+          <div class="promo-expiry" data-expiry="hard" hidden>
+            <i data-lucide="calendar-clock"></i>
+            <span></span>
+            <span class="promo-countdown" data-countdown="hard"></span>
+          </div>
+        </div>
+        <i data-lucide="chevron-right" class="product-row__chevron"></i>
+      </div>
+
+    </div>
+
+    <!-- COMMUNITY -->
+    <div class="section-label">
+      <i data-lucide="users"></i>
+      <span data-i18n="section_community">Community</span>
+      <div class="section-label__line"></div>
+    </div>
+
+    <div class="group-card">
+      <a class="nav-row" href="https://whatsapp.com/channel/0029Vb8rL72FCCoLlHTloP09"
+         target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Community">
+        <span class="nav-row__icon-wrap"><i data-lucide="message-circle"></i></span>
+        <span class="nav-row__label" data-i18n="wa_channel">WhatsApp Channel</span>
+        <i data-lucide="external-link" class="nav-row__chevron"></i>
+      </a>
+      <a class="nav-row" href="https://t.me/WyrdCommunity"
+         target="_blank" rel="noopener noreferrer" aria-label="Telegram Community">
+        <span class="nav-row__icon-wrap"><i data-lucide="send"></i></span>
+        <span class="nav-row__label" data-i18n="tg_group">Telegram Group</span>
+        <i data-lucide="external-link" class="nav-row__chevron"></i>
+      </a>
+    </div>
+
+    <!-- INFORMATION -->
+    <div class="section-label">
+      <i data-lucide="info"></i>
+      <span data-i18n="section_info">Information</span>
+      <div class="section-label__line"></div>
+    </div>
+
+    <div class="group-card">
+      <div class="info-row">
+        <img class="info-row__icon"
+             src="https://ganga--link--ghhzdp9sv8hk.code.run/i/udqqizg1r0"
+             alt="Ibnuxiter" width="36" height="36" loading="lazy"
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2236%22 height=%2236%22%3E%3Crect width=%2236%22 height=%2236%22 rx=%228%22 fill=%22%232d1017%22/%3E%3C/svg%3E'" />
+        <span class="info-row__label" data-i18n="developer">Developer</span>
+        <span class="info-row__value">Ibnuxiter</span>
+      </div>
+      <div class="info-row">
+        <span class="nav-row__icon-wrap" style="background:rgba(139,38,57,.14);border:1px solid var(--border-subtle);color:var(--burgundy-300);width:36px;height:36px;border-radius:var(--radius-sm);display:grid;place-items:center;flex-shrink:0;">
+          <i data-lucide="calendar" style="width:17px;height:17px;"></i>
+        </span>
+        <span class="info-row__label" data-i18n="created">Created</span>
+        <span class="info-row__value">November 12, 2026</span>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="app-footer">
+      <p class="app-footer__line">
+        <span class="app-footer__brand">WYRD</span> &mdash; <span data-i18n="footer_tag">Crafted with precision.</span>
+      </p>
+      <p class="app-footer__line" style="margin-top:6px;opacity:.6;">
+        <span data-i18n="footer_rates">Rates by</span> <a href="https://open.er-api.com" target="_blank" rel="noopener"
+                    style="color:var(--burgundy-400);text-decoration:none;font-weight:600;">Open ER-API</a>
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- CURRENCY DIALOG -->
+  <div class="dialog-overlay" id="currencyDialog" role="dialog" aria-modal="true"
+       aria-labelledby="currencyDialogTitle">
+    <div class="dialog">
+      <div class="dialog__grabber" aria-hidden="true"></div>
+      <div class="dialog__header">
+        <h2 class="dialog__title" id="currencyDialogTitle" data-i18n="currency_title">Currency</h2>
+        <button class="dialog__close" id="btnCloseCurrency" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="dialog__body">
+        <div class="dialog-status" id="rateStatus">
+          <span class="dialog-status__dot"></span>
+          <i data-lucide="refresh-cw" style="display:none;"></i>
+          <span id="rateStatusText">Fetching live rates...</span>
+        </div>
+        <div class="dialog-search">
+          <i data-lucide="search"></i>
+          <input type="text" id="currencySearch" placeholder="Search currency..."
+                 autocomplete="off" spellcheck="false" />
+        </div>
+        <div class="currency-list" id="currencyList" role="listbox" aria-label="Currency options">
+          <div class="skeleton-row"><div class="skeleton-row__circle"></div>
+            <div class="skeleton-row__lines">
+              <div class="skeleton-row__line"></div>
+              <div class="skeleton-row__line skeleton-row__line--short"></div>
+            </div>
+          </div>
+          <div class="skeleton-row"><div class="skeleton-row__circle"></div>
+            <div class="skeleton-row__lines">
+              <div class="skeleton-row__line"></div>
+              <div class="skeleton-row__line skeleton-row__line--short"></div>
+            </div>
+          </div>
+          <div class="skeleton-row"><div class="skeleton-row__circle"></div>
+            <div class="skeleton-row__lines">
+              <div class="skeleton-row__line"></div>
+              <div class="skeleton-row__line skeleton-row__line--short"></div>
+            </div>
+          </div>
+        </div>
+        <div class="rate-ref" id="rateRef" style="display:none;">
+          <div class="rate-ref__label">
+            <i data-lucide="trending-up"></i> <span data-i18n="rate_ref">Exchange Rate Reference</span>
+          </div>
+          <div class="rate-ref__value" id="rateRefValue">—</div>
+          <div class="rate-ref__sub" id="rateRefSub">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LANGUAGE DIALOG (populated by JS) -->
+  <div class="dialog-overlay" id="languageDialog" role="dialog" aria-modal="true"
+       aria-labelledby="languageDialogTitle">
+    <div class="dialog">
+      <div class="dialog__grabber" aria-hidden="true"></div>
+      <div class="dialog__header">
+        <h2 class="dialog__title" id="languageDialogTitle" data-i18n="language_title">Language</h2>
+        <button class="dialog__close" id="btnCloseLanguage" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="dialog__body">
+        <div class="currency-list" id="languageList" role="listbox" aria-label="Language options"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PURCHASE MODAL -->
+  <div class="purchase-overlay" id="purchaseOverlay" role="dialog" aria-modal="true"
+       aria-labelledby="purchaseTitle">
+    <div class="purchase-modal">
+      <img class="purchase-modal__icon" id="purchaseIcon"
+           src="https://files.catbox.moe/wyrd-lite.png" alt="" width="54" height="54"
+           onerror="this.style.display='none'" />
+      <h3 class="purchase-modal__title" id="purchaseTitle" data-i18n="purchase_title">Complete Purchase</h3>
+      <p class="purchase-modal__product" id="purchaseProductName">WYRD LITE</p>
+      <p class="purchase-modal__price" id="purchasePrice">Rp40.000</p>
+
+      <label class="purchase-modal__label" for="buyerName" data-i18n="purchase_name_label">Your Name</label>
+      <input class="purchase-modal__input" id="buyerName" type="text"
+             placeholder="Enter your full name..." autocomplete="name"
+             maxlength="80" spellcheck="false" data-i18n-placeholder="purchase_name_ph" />
+
+      <div class="purchase-modal__actions">
+        <button class="btn btn--ghost" id="btnCancelPurchase">
+          <i data-lucide="x"></i> <span data-i18n="btn_cancel">Cancel</span>
+        </button>
+        <button class="btn btn--primary" id="btnConfirmPurchase" disabled>
+          <i data-lucide="send"></i> <span data-i18n="btn_buy">Buy via WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <i data-lucide="check-circle"></i>
+    <span id="toastText"></span>
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+  (function () {
+    'use strict';
+
+    const CONFIG = {
+      whatsappNumber: '6285695344487',
+      defaultCurrency: 'IDR',
+      baseCurrency: 'IDR',
+      rateApiBase: 'https://open.er-api.com/v6/latest',
+      fallbackApiBase: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies',
+      cacheKey: 'wyrd:fx',
+      cacheTTL: 30 * 60 * 1000,
+      localeKey: 'wyrd:lang',
+      defaultLang: 'en',
+    };
+
+    // SETT PRODUK
+    const PRODUCTS = {
+      lite: {
+        name: 'WYRD LITE',
+        priceIDR: 40000,
+        icon: 'https://ganga--link--ghhzdp9sv8hk.code.run/i/y6k38a6ouh',
+       // promo: { code: '11.11', label: '11.11', endDate: '2026-11-11T23:59:59+07:00' },
+      },
+      standar: {
+        name: 'WYRD STANDAR',
+        priceIDR: 60000,
+        icon: 'https://ganga--link--ghhzdp9sv8hk.code.run/i/y6k38a6ouh',
+       // promo: { code: '12.12', label: '12.12', endDate: '2026-12-12T23:59:59+07:00' },
+      },
+      medium: {
+        name: 'WYRD MEDIUM',
+        priceIDR: 140000,
+        icon: 'https://ganga--link--ghhzdp9sv8hk.code.run/i/y6k38a6ouh',
+       // promo: { code: '11.11', label: '11.11', endDate: '2026-11-11T23:59:59+07:00' },
+      },
+      hard: {
+        name: 'WYRD HARD',
+        priceIDR: 200000,
+        icon: 'https://ganga--link--ghhzdp9sv8hk.code.run/i/y6k38a6ouh',
+       // promo: { code: '12.12', label: '12.12', endDate: '2026-12-12T23:59:59+07:00' },
+      },
+    };
+
+    const CURRENCY_META = [
+      { code: 'IDR', flag: '🇮🇩', name: 'Indonesian Rupiah', locale: 'id-ID' },
+      { code: 'USD', flag: '🇺🇸', name: 'US Dollar', locale: 'en-US' },
+      { code: 'EUR', flag: '🇪🇺', name: 'Euro', locale: 'de-DE' },
+      { code: 'GBP', flag: '🇬🇧', name: 'British Pound', locale: 'en-GB' },
+      { code: 'JPY', flag: '🇯🇵', name: 'Japanese Yen', locale: 'ja-JP' },
+      { code: 'CNY', flag: '🇨🇳', name: 'Chinese Yuan', locale: 'zh-CN' },
+      { code: 'KRW', flag: '🇰🇷', name: 'South Korean Won', locale: 'ko-KR' },
+      { code: 'INR', flag: '🇮🇳', name: 'Indian Rupee', locale: 'en-IN' },
+      { code: 'AUD', flag: '🇦🇺', name: 'Australian Dollar', locale: 'en-AU' },
+      { code: 'CAD', flag: '🇨🇦', name: 'Canadian Dollar', locale: 'en-CA' },
+      { code: 'CHF', flag: '🇨🇭', name: 'Swiss Franc', locale: 'de-CH' },
+      { code: 'SEK', flag: '🇸🇪', name: 'Swedish Krona', locale: 'sv-SE' },
+      { code: 'NOK', flag: '🇳🇴', name: 'Norwegian Krone', locale: 'nb-NO' },
+      { code: 'DKK', flag: '🇩🇰', name: 'Danish Krone', locale: 'da-DK' },
+      { code: 'PLN', flag: '🇵🇱', name: 'Polish Zloty', locale: 'pl-PL' },
+      { code: 'CZK', flag: '🇨🇿', name: 'Czech Koruna', locale: 'cs-CZ' },
+      { code: 'HUF', flag: '🇭🇺', name: 'Hungarian Forint', locale: 'hu-HU' },
+      { code: 'RON', flag: '🇷🇴', name: 'Romanian Leu', locale: 'ro-RO' },
+      { code: 'BGN', flag: '🇧🇬', name: 'Bulgarian Lev', locale: 'bg-BG' },
+      { code: 'TRY', flag: '🇹🇷', name: 'Turkish Lira', locale: 'tr-TR' },
+      { code: 'ZAR', flag: '🇿🇦', name: 'South African Rand', locale: 'en-ZA' },
+      { code: 'BRL', flag: '🇧🇷', name: 'Brazilian Real', locale: 'pt-BR' },
+      { code: 'MXN', flag: '🇲🇽', name: 'Mexican Peso', locale: 'es-MX' },
+      { code: 'SGD', flag: '🇸🇬', name: 'Singapore Dollar', locale: 'en-SG' },
+      { code: 'HKD', flag: '🇭🇰', name: 'Hong Kong Dollar', locale: 'zh-HK' },
+      { code: 'NZD', flag: '🇳🇿', name: 'New Zealand Dollar', locale: 'en-NZ' },
+      { code: 'THB', flag: '🇹🇭', name: 'Thai Baht', locale: 'th-TH' },
+      { code: 'MYR', flag: '🇲🇾', name: 'Malaysian Ringgit', locale: 'ms-MY' },
+      { code: 'PHP', flag: '🇵🇭', name: 'Philippine Peso', locale: 'en-PH' },
+      { code: 'ILS', flag: '🇮🇱', name: 'Israeli Shekel', locale: 'he-IL' },
+      { code: 'ISK', flag: '🇮🇸', name: 'Icelandic Krona', locale: 'is-IS' },
+    ];
+
+    /* ============================================================
+       LANGUAGES (superpower countries)
+       ============================================================ */
+    const LANGUAGES = [
+      { code: 'en', flag: '🇬🇧', name: 'English' },
+      { code: 'id', flag: '🇮🇩', name: 'Bahasa Indonesia' },
+      { code: 'zh', flag: '🇨🇳', name: '中文' },
+      { code: 'ja', flag: '🇯🇵', name: '日本語' },
+      { code: 'ko', flag: '🇰🇷', name: '한국어' },
+      { code: 'es', flag: '🇪🇸', name: 'Español' },
+      { code: 'fr', flag: '🇫🇷', name: 'Français' },
+      { code: 'de', flag: '🇩🇪', name: 'Deutsch' },
+      { code: 'pt', flag: '🇧🇷', name: 'Português' },
+      { code: 'ru', flag: '🇷🇺', name: 'Русский' },
+      { code: 'hi', flag: '🇮🇳', name: 'हिन्दी' },
+      { code: 'ar', flag: '🇸🇦', name: 'العربية' },
+      { code: 'it', flag: '🇮🇹', name: 'Italiano' },
+      { code: 'tr', flag: '🇹🇷', name: 'Türkçe' },
+      { code: 'nl', flag: '🇳🇱', name: 'Nederlands' },
+    ];
+
+    /* ============================================================
+       TRANSLATIONS
+       ============================================================ */
+    const TRANSLATIONS = {
+      en: {
+        tagline: 'Performance Enhancement Tool',
+        section_products: 'Products',
+        section_community: 'Community',
+        section_info: 'Information',
+        desc_lite: 'Low performance power. 25%.',
+        desc_standar: 'Medium performance power. 40%.',
+        desc_medium: 'High performance power. 70%.',
+        desc_hard: 'Maximum performance power. 95%.',
+        wa_channel: 'WhatsApp Channel',
+        tg_group: 'Telegram Group',
+        developer: 'Developer',
+        created: 'Created',
+        footer_tag: 'Crafted with precision.',
+        footer_rates: 'Rates by',
+        currency_title: 'Currency',
+        language_title: 'Language',
+        rate_ref: 'Exchange Rate Reference',
+        purchase_title: 'Complete Purchase',
+        purchase_name_label: 'Your Name',
+        purchase_name_ph: 'Enter your full name...',
+        btn_cancel: 'Cancel',
+        btn_buy: 'Buy via WhatsApp',
+        currency_set: 'Currency set to {code}',
+        language_set: 'Language set to {lang}',
+        name_required: 'Please enter your name',
+        redirect_wa: 'Redirecting to WhatsApp...',
+      },
+      id: {
+        tagline: 'Alat Meningkatkan Performa',
+        section_products: 'Produk',
+        section_community: 'Komunitas',
+        section_info: 'Informasi',
+        desc_lite: 'Kekuatan performa rendah. 25%.',
+        desc_standar: 'Kekuatan performa menengah. 40%.',
+        desc_medium: 'Kekuatan performa tinggi. 70%.',
+        desc_hard: 'Kekuatan performa maksimal. 95%.',
+        wa_channel: 'Saluran WhatsApp',
+        tg_group: 'Grup Telegram',
+        developer: 'Pengembang',
+        created: 'Dibuat',
+        footer_tag: 'Dibuat dengan presisi.',
+        footer_rates: 'Rate oleh',
+        currency_title: 'Mata Uang',
+        language_title: 'Bahasa',
+        rate_ref: 'Referensi Nilai Tukar',
+        purchase_title: 'Selesaikan Pembelian',
+        purchase_name_label: 'Nama Anda',
+        purchase_name_ph: 'Masukkan nama lengkap...',
+        btn_cancel: 'Batal',
+        btn_buy: 'Beli via WhatsApp',
+        currency_set: 'Mata uang diatur ke {code}',
+        language_set: 'Bahasa diatur ke {lang}',
+        name_required: 'Silakan masukkan nama Anda',
+        redirect_wa: 'Mengalihkan ke WhatsApp...',
+      },
+      zh: {
+        tagline: '性能提升工具',
+        section_products: '产品',
+        section_community: '社区',
+        section_info: '信息',
+        desc_lite: '低性能功率。25%。',
+        desc_standar: '中等性能功率。40%。',
+        desc_medium: '高性能功率。70%。',
+        desc_hard: '最大性能功率。95%。',
+        wa_channel: 'WhatsApp 频道',
+        tg_group: 'Telegram 群组',
+        developer: '开发者',
+        created: '创建于',
+        footer_tag: '精心打造。',
+        footer_rates: '汇率来源',
+        currency_title: '货币',
+        language_title: '语言',
+        rate_ref: '汇率参考',
+        purchase_title: '完成购买',
+        purchase_name_label: '您的姓名',
+        purchase_name_ph: '请输入您的全名...',
+        btn_cancel: '取消',
+        btn_buy: '通过 WhatsApp 购买',
+        currency_set: '货币已设置为 {code}',
+        language_set: '语言已设置为 {lang}',
+        name_required: '请输入您的姓名',
+        redirect_wa: '正在跳转到 WhatsApp...',
+      },
+      ja: {
+        tagline: 'パフォーマンス向上ツール',
+        section_products: '製品',
+        section_community: 'コミュニティ',
+        section_info: '情報',
+        desc_lite: '低パフォーマンス出力。25%。',
+        desc_standar: '中パフォーマンス出力。40%。',
+        desc_medium: '高パフォーマンス出力。70%。',
+        desc_hard: '最大パフォーマンス出力。95%。',
+        wa_channel: 'WhatsAppチャンネル',
+        tg_group: 'Telegramグループ',
+        developer: '開発者',
+        created: '作成日',
+        footer_tag: '精密に作られています。',
+        footer_rates: 'レート提供',
+        currency_title: '通貨',
+        language_title: '言語',
+        rate_ref: '為替レート参照',
+        purchase_title: '購入を完了',
+        purchase_name_label: 'お名前',
+        purchase_name_ph: 'フルネームを入力...',
+        btn_cancel: 'キャンセル',
+        btn_buy: 'WhatsAppで購入',
+        currency_set: '通貨を{code}に設定しました',
+        language_set: '言語を{lang}に設定しました',
+        name_required: 'お名前を入力してください',
+        redirect_wa: 'WhatsAppにリダイレクト中...',
+      },
+      ko: {
+        tagline: '성능 향상 도구',
+        section_products: '제품',
+        section_community: '커뮤니티',
+        section_info: '정보',
+        desc_lite: '낮은 성능 출력. 25%.',
+        desc_standar: '중간 성능 출력. 40%.',
+        desc_medium: '높은 성능 출력. 70%.',
+        desc_hard: '최대 성능 출력. 95%.',
+        wa_channel: 'WhatsApp 채널',
+        tg_group: 'Telegram 그룹',
+        developer: '개발자',
+        created: '생성일',
+        footer_tag: '정밀하게 제작되었습니다.',
+        footer_rates: '환율 제공',
+        currency_title: '통화',
+        language_title: '언어',
+        rate_ref: '환율 참조',
+        purchase_title: '구매 완료',
+        purchase_name_label: '이름',
+        purchase_name_ph: '전체 이름 입력...',
+        btn_cancel: '취소',
+        btn_buy: 'WhatsApp으로 구매',
+        currency_set: '통화가 {code}로 설정되었습니다',
+        language_set: '언어가 {lang}로 설정되었습니다',
+        name_required: '이름을 입력해주세요',
+        redirect_wa: 'WhatsApp으로 이동 중...',
+      },
+      es: {
+        tagline: 'Herramienta de mejora del rendimiento',
+        section_products: 'Productos',
+        section_community: 'Comunidad',
+        section_info: 'Información',
+        desc_lite: 'Potencia de rendimiento baja. 25%.',
+        desc_standar: 'Potencia de rendimiento media. 40%.',
+        desc_medium: 'Potencia de rendimiento alta. 70%.',
+        desc_hard: 'Potencia de rendimiento máxima. 95%.',
+        wa_channel: 'Canal de WhatsApp',
+        tg_group: 'Grupo de Telegram',
+        developer: 'Desarrollador',
+        created: 'Creado',
+        footer_tag: 'Hecho con precisión.',
+        footer_rates: 'Tarifas por',
+        currency_title: 'Moneda',
+        language_title: 'Idioma',
+        rate_ref: 'Referencia de tipo de cambio',
+        purchase_title: 'Completar compra',
+        purchase_name_label: 'Su nombre',
+        purchase_name_ph: 'Ingrese su nombre completo...',
+        btn_cancel: 'Cancelar',
+        btn_buy: 'Comprar por WhatsApp',
+        currency_set: 'Moneda establecida en {code}',
+        language_set: 'Idioma establecido en {lang}',
+        name_required: 'Por favor ingrese su nombre',
+        redirect_wa: 'Redirigiendo a WhatsApp...',
+      },
+      fr: {
+        tagline: "Outil d'amélioration des performances",
+        section_products: 'Produits',
+        section_community: 'Communauté',
+        section_info: 'Informations',
+        desc_lite: 'Puissance de performance faible. 25 %.',
+        desc_standar: 'Puissance de performance moyenne. 40 %.',
+        desc_medium: 'Puissance de performance élevée. 70 %.',
+        desc_hard: 'Puissance de performance maximale. 95 %.',
+        wa_channel: 'Chaîne WhatsApp',
+        tg_group: 'Groupe Telegram',
+        developer: 'Développeur',
+        created: 'Créé',
+        footer_tag: 'Conçu avec précision.',
+        footer_rates: 'Taux par',
+        currency_title: 'Devise',
+        language_title: 'Langue',
+        rate_ref: 'Référence du taux de change',
+        purchase_title: "Finaliser l'achat",
+        purchase_name_label: 'Votre nom',
+        purchase_name_ph: 'Entrez votre nom complet...',
+        btn_cancel: 'Annuler',
+        btn_buy: 'Acheter via WhatsApp',
+        currency_set: 'Devise définie sur {code}',
+        language_set: 'Langue définie sur {lang}',
+        name_required: 'Veuillez entrer votre nom',
+        redirect_wa: 'Redirection vers WhatsApp...',
+      },
+      de: {
+        tagline: 'Leistungssteigerungstool',
+        section_products: 'Produkte',
+        section_community: 'Community',
+        section_info: 'Informationen',
+        desc_lite: 'Geringe Leistungsstärke. 25 %.',
+        desc_standar: 'Mittlere Leistungsstärke. 40 %.',
+        desc_medium: 'Hohe Leistungsstärke. 70 %.',
+        desc_hard: 'Maximale Leistungsstärke. 95 %.',
+        wa_channel: 'WhatsApp-Kanal',
+        tg_group: 'Telegram-Gruppe',
+        developer: 'Entwickler',
+        created: 'Erstellt',
+        footer_tag: 'Mit Präzision gefertigt.',
+        footer_rates: 'Kurse von',
+        currency_title: 'Währung',
+        language_title: 'Sprache',
+        rate_ref: 'Wechselkursreferenz',
+        purchase_title: 'Kauf abschließen',
+        purchase_name_label: 'Ihr Name',
+        purchase_name_ph: 'Geben Sie Ihren vollständigen Namen ein...',
+        btn_cancel: 'Abbrechen',
+        btn_buy: 'Über WhatsApp kaufen',
+        currency_set: 'Währung auf {code} gesetzt',
+        language_set: 'Sprache auf {lang} gesetzt',
+        name_required: 'Bitte geben Sie Ihren Namen ein',
+        redirect_wa: 'Weiterleitung zu WhatsApp...',
+      },
+      pt: {
+        tagline: 'Ferramenta de melhoria de desempenho',
+        section_products: 'Produtos',
+        section_community: 'Comunidade',
+        section_info: 'Informações',
+        desc_lite: 'Potência de desempenho baixa. 25%.',
+        desc_standar: 'Potência de desempenho média. 40%.',
+        desc_medium: 'Potência de desempenho alta. 70%.',
+        desc_hard: 'Potência de desempenho máxima. 95%.',
+        wa_channel: 'Canal do WhatsApp',
+        tg_group: 'Grupo do Telegram',
+        developer: 'Desenvolvedor',
+        created: 'Criado',
+        footer_tag: 'Feito com precisão.',
+        footer_rates: 'Taxas por',
+        currency_title: 'Moeda',
+        language_title: 'Idioma',
+        rate_ref: 'Referência de taxa de câmbio',
+        purchase_title: 'Concluir compra',
+        purchase_name_label: 'Seu nome',
+        purchase_name_ph: 'Digite seu nome completo...',
+        btn_cancel: 'Cancelar',
+        btn_buy: 'Comprar via WhatsApp',
+        currency_set: 'Moeda definida para {code}',
+        language_set: 'Idioma definido para {lang}',
+        name_required: 'Por favor insira seu nome',
+        redirect_wa: 'Redirecionando para WhatsApp...',
+      },
+      ru: {
+        tagline: 'Инструмент повышения производительности',
+        section_products: 'Продукты',
+        section_community: 'Сообщество',
+        section_info: 'Информация',
+        desc_lite: 'Низкая производительность. 25%.',
+        desc_standar: 'Средняя производительность. 40%.',
+        desc_medium: 'Высокая производительность. 70%.',
+        desc_hard: 'Максимальная производительность. 95%.',
+        wa_channel: 'Канал WhatsApp',
+        tg_group: 'Группа Telegram',
+        developer: 'Разработчик',
+        created: 'Создано',
+        footer_tag: 'Создано с точностью.',
+        footer_rates: 'Курсы от',
+        currency_title: 'Валюта',
+        language_title: 'Язык',
+        rate_ref: 'Справочник обменного курса',
+        purchase_title: 'Завершить покупку',
+        purchase_name_label: 'Ваше имя',
+        purchase_name_ph: 'Введите полное имя...',
+        btn_cancel: 'Отмена',
+        btn_buy: 'Купить через WhatsApp',
+        currency_set: 'Валюта установлена на {code}',
+        language_set: 'Язык установлен на {lang}',
+        name_required: 'Пожалуйста, введите ваше имя',
+        redirect_wa: 'Перенаправление на WhatsApp...',
+      },
+      hi: {
+        tagline: 'प्रदर्शन वृद्धि उपकरण',
+        section_products: 'उत्पाद',
+        section_community: 'समुदाय',
+        section_info: 'जानकारी',
+        desc_lite: 'कम प्रदर्शन शक्ति। 25%।',
+        desc_standar: 'मध्यम प्रदर्शन शक्ति। 40%।',
+        desc_medium: 'उच्च प्रदर्शन शक्ति। 70%।',
+        desc_hard: 'अधिकतम प्रदर्शन शक्ति। 95%।',
+        wa_channel: 'WhatsApp चैनल',
+        tg_group: 'Telegram समूह',
+        developer: 'डेवलपर',
+        created: 'बनाया गया',
+        footer_tag: 'सटीकता से बनाया गया।',
+        footer_rates: 'दरें',
+        currency_title: 'मुद्रा',
+        language_title: 'भाषा',
+        rate_ref: 'विनिमय दर संदर्भ',
+        purchase_title: 'खरीद पूर्ण करें',
+        purchase_name_label: 'आपका नाम',
+        purchase_name_ph: 'अपना पूरा नाम दर्ज करें...',
+        btn_cancel: 'रद्द करें',
+        btn_buy: 'WhatsApp से खरीदें',
+        currency_set: 'मुद्रा {code} पर सेट की गई',
+        language_set: 'भाषा {lang} पर सेट की गई',
+        name_required: 'कृपया अपना नाम दर्ज करें',
+        redirect_wa: 'WhatsApp पर पुनर्निर्देशित किया जा रहा है...',
+      },
+      ar: {
+        tagline: 'أداة تحسين الأداء',
+        section_products: 'المنتجات',
+        section_community: 'المجتمع',
+        section_info: 'معلومات',
+        desc_lite: 'قوة أداء منخفضة. 25%.',
+        desc_standar: 'قوة أداء متوسطة. 40%.',
+        desc_medium: 'قوة أداء عالية. 70%.',
+        desc_hard: 'قوة أداء قصوى. 95%.',
+        wa_channel: 'قناة واتساب',
+        tg_group: 'مجموعة تيليجرام',
+        developer: 'المطور',
+        created: 'تم الإنشاء',
+        footer_tag: 'صُنع بدقة.',
+        footer_rates: 'الأسعار من',
+        currency_title: 'العملة',
+        language_title: 'اللغة',
+        rate_ref: 'مرجع سعر الصرف',
+        purchase_title: 'إتمام الشراء',
+        purchase_name_label: 'اسمك',
+        purchase_name_ph: 'أدخل اسمك الكامل...',
+        btn_cancel: 'إلغاء',
+        btn_buy: 'الشراء عبر واتساب',
+        currency_set: 'تم تعيين العملة إلى {code}',
+        language_set: 'تم تعيين اللغة إلى {lang}',
+        name_required: 'يرجى إدخال اسمك',
+        redirect_wa: 'جارٍ إعادة التوجيه إلى واتساب...',
+      },
+      it: {
+        tagline: 'Strumento di miglioramento delle prestazioni',
+        section_products: 'Prodotti',
+        section_community: 'Comunità',
+        section_info: 'Informazioni',
+        desc_lite: 'Potenza di prestazioni bassa. 25%.',
+        desc_standar: 'Potenza di prestazioni media. 40%.',
+        desc_medium: 'Potenza di prestazioni alta. 70%.',
+        desc_hard: 'Potenza di prestazioni massima. 95%.',
+        wa_channel: 'Canale WhatsApp',
+        tg_group: 'Gruppo Telegram',
+        developer: 'Sviluppatore',
+        created: 'Creato',
+        footer_tag: 'Realizzato con precisione.',
+        footer_rates: 'Tariffe di',
+        currency_title: 'Valuta',
+        language_title: 'Lingua',
+        rate_ref: 'Riferimento tasso di cambio',
+        purchase_title: 'Completa acquisto',
+        purchase_name_label: 'Il tuo nome',
+        purchase_name_ph: 'Inserisci il tuo nome completo...',
+        btn_cancel: 'Annulla',
+        btn_buy: 'Acquista via WhatsApp',
+        currency_set: 'Valuta impostata su {code}',
+        language_set: 'Lingua impostata su {lang}',
+        name_required: 'Inserisci il tuo nome',
+        redirect_wa: 'Reindirizzamento a WhatsApp...',
+      },
+      tr: {
+        tagline: 'Performans Artırma Aracı',
+        section_products: 'Ürünler',
+        section_community: 'Topluluk',
+        section_info: 'Bilgi',
+        desc_lite: 'Düşük performans gücü. %25.',
+        desc_standar: 'Orta performans gücü. %40.',
+        desc_medium: 'Yüksek performans gücü. %70.',
+        desc_hard: 'Maksimum performans gücü. %95.',
+        wa_channel: 'WhatsApp Kanalı',
+        tg_group: 'Telegram Grubu',
+        developer: 'Geliştirici',
+        created: 'Oluşturulma',
+        footer_tag: 'Hassasiyetle üretildi.',
+        footer_rates: 'Kur kaynağı',
+        currency_title: 'Para Birimi',
+        language_title: 'Dil',
+        rate_ref: 'Döviz Kuru Referansı',
+        purchase_title: 'Satın Almayı Tamamla',
+        purchase_name_label: 'Adınız',
+        purchase_name_ph: 'Tam adınızı girin...',
+        btn_cancel: 'İptal',
+        btn_buy: 'WhatsApp ile Satın Al',
+        currency_set: 'Para birimi {code} olarak ayarlandı',
+        language_set: 'Dil {lang} olarak ayarlandı',
+        name_required: 'Lütfen adınızı girin',
+        redirect_wa: "WhatsApp'a yönlendiriliyor...",
+      },
+      nl: {
+        tagline: 'Prestatieverbeteringstool',
+        section_products: 'Producten',
+        section_community: 'Gemeenschap',
+        section_info: 'Informatie',
+        desc_lite: 'Lage prestatiekracht. 25%.',
+        desc_standar: 'Gemiddelde prestatiekracht. 40%.',
+        desc_medium: 'Hoge prestatiekracht. 70%.',
+        desc_hard: 'Maximale prestatiekracht. 95%.',
+        wa_channel: 'WhatsApp-kanaal',
+        tg_group: 'Telegram-groep',
+        developer: 'Ontwikkelaar',
+        created: 'Gemaakt',
+        footer_tag: 'Met precisie vervaardigd.',
+        footer_rates: 'Koersen door',
+        currency_title: 'Valuta',
+        language_title: 'Taal',
+        rate_ref: 'Wisselkoersreferentie',
+        purchase_title: 'Aankoop voltooien',
+        purchase_name_label: 'Uw naam',
+        purchase_name_ph: 'Voer uw volledige naam in...',
+        btn_cancel: 'Annuleren',
+        btn_buy: 'Kopen via WhatsApp',
+        currency_set: 'Valuta ingesteld op {code}',
+        language_set: 'Taal ingesteld op {lang}',
+        name_required: 'Voer uw naam in',
+        redirect_wa: 'Doorsturen naar WhatsApp...',
+      },
+    };
+
+    /* ==========================================================
+       STATE
+       ========================================================== */
+    const state = {
+      currency: localStorage.getItem(CONFIG.cacheKey + ':currency') || CONFIG.defaultCurrency,
+      lang: localStorage.getItem(CONFIG.localeKey) || CONFIG.defaultLang,
+      rates: null,
+      ratesDate: null,
+      ratesBase: CONFIG.baseCurrency,
+      rateFetchError: false,
+      activeProductKey: null,
+      searchQuery: '',
+    };
+
+    // Ensure stored lang is valid
+    if (!TRANSLATIONS[state.lang]) state.lang = CONFIG.defaultLang;
+
+    /* ==========================================================
+       HELPERS
+       ========================================================== */
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+    function t(key, vars = {}) {
+      const dict = TRANSLATIONS[state.lang] || TRANSLATIONS.en;
+      let str = dict[key] || TRANSLATIONS.en[key] || key;
+      Object.keys(vars).forEach((k) => {
+        str = str.replace(new RegExp(`\\{${k}\\}`, 'g'), vars[k]);
+      });
+      return str;
+    }
+
+    function formatCurrency(amount, currencyCode, localeOverride) {
+      const meta = CURRENCY_META.find((c) => c.code === currencyCode);
+      const locale = localeOverride || (meta ? meta.locale : navigator.language || 'en-US');
+      try {
+        return new Intl.NumberFormat(locale, {
+          style: 'currency',
+          currency: currencyCode,
+          minimumFractionDigits: currencyCode === 'IDR' || currencyCode === 'JPY' ? 0 : 2,
+          maximumFractionDigits: currencyCode === 'IDR' || currencyCode === 'JPY' ? 0 : 2,
+        }).format(amount);
+      } catch {
+        return `${currencyCode} ${amount.toFixed(2)}`;
+      }
+    }
+
+    function formatCompact(amount, currencyCode, localeOverride) {
+      const meta = CURRENCY_META.find((c) => c.code === currencyCode);
+      const locale = localeOverride || (meta ? meta.locale : 'en-US');
+      try {
+        return new Intl.NumberFormat(locale, {
+          style: 'currency',
+          currency: currencyCode,
+          notation: 'compact',
+          maximumFractionDigits: 1,
+        }).format(amount);
+      } catch {
+        return formatCurrency(amount, currencyCode, localeOverride);
+      }
+    }
+
+    function convertFromIDR(amountIDR, targetCurrency) {
+      if (!state.rates) return null;
+      if (targetCurrency === CONFIG.baseCurrency) return amountIDR;
+      const rate = state.rates[targetCurrency];
+      if (typeof rate !== 'number') return null;
+      return amountIDR * rate;
+    }
+
+    function isPromoActive(product) {
+      if (!product.promo) return false;
+      return Date.now() < new Date(product.promo.endDate).getTime();
+    }
+
+    function formatDateShort(iso) {
+      try {
+        const localeMap = {
+          en: 'en-GB', id: 'id-ID', zh: 'zh-CN', ja: 'ja-JP', ko: 'ko-KR',
+          es: 'es-ES', fr: 'fr-FR', de: 'de-DE', pt: 'pt-BR', ru: 'ru-RU',
+          hi: 'hi-IN', ar: 'ar-SA', it: 'it-IT', tr: 'tr-TR', nl: 'nl-NL',
+        };
+        return new Date(iso).toLocaleDateString(localeMap[state.lang] || 'en-GB', {
+          day: '2-digit', month: 'short', year: 'numeric',
+        });
+      } catch { return iso; }
+    }
+
+    function debounce(fn, ms) {
+      let timer;
+      return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), ms);
+      };
+    }
+
+    function escapeHTML(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    /* ==========================================================
+       APPLY TRANSLATIONS
+       ========================================================== */
+    function applyTranslations() {
+      $$('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (key) el.textContent = t(key);
+      });
+      $$('[data-i18n-placeholder]').forEach((el) => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (key) el.setAttribute('placeholder', t(key));
+      });
+      document.documentElement.lang = state.lang;
+    }
+
+    function updateHeaderIndicators() {
+      const currencyBtn = $('#btnCurrency');
+      const langBtn = $('#btnLanguage');
+      if (currencyBtn) currencyBtn.classList.toggle('has-indicator', state.currency !== CONFIG.defaultCurrency);
+      if (langBtn) langBtn.classList.toggle('has-indicator', state.lang !== CONFIG.defaultLang);
+    }
+
+    /* ==========================================================
+       TOAST
+       ========================================================== */
+    let toastTimer = null;
+    function showToast(message, icon = 'check-circle') {
+      const toast = $('#toast');
+      $('#toastText').textContent = message;
+      const iconEl = toast.querySelector('i');
+      if (iconEl) iconEl.setAttribute('data-lucide', icon);
+      if (window.lucide) lucide.createIcons({ attrs: { class: 'lucide' } });
+      toast.classList.add('is-visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2800);
+    }
+
+    /* ==========================================================
+       RATE FETCHING
+       ========================================================== */
+    async function fetchRates() {
+      const cachedRaw = localStorage.getItem(CONFIG.cacheKey);
+      if (cachedRaw) {
+        try {
+          const cached = JSON.parse(cachedRaw);
+          if (cached && cached.timestamp && Date.now() - cached.timestamp < CONFIG.cacheTTL) {
+            state.rates = cached.rates;
+            state.ratesDate = cached.date;
+            state.ratesBase = cached.base || CONFIG.baseCurrency;
+            state.rateFetchError = false;
+            return;
+          }
+        } catch { /* ignore */ }
+      }
+
+      try {
+        const url = `${CONFIG.rateApiBase}/${CONFIG.baseCurrency}`;
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 12000);
+        const res = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        if (!data || !data.rates || typeof data.rates !== 'object') {
+          throw new Error('Invalid rate payload');
+        }
+
+        state.rates = data.rates;
+        state.ratesDate = data.time_last_update_utc
+          ? new Date(data.time_last_update_utc).toISOString().slice(0, 10)
+          : new Date().toISOString().slice(0, 10);
+        state.ratesBase = data.base_code || CONFIG.baseCurrency;
+        state.rateFetchError = false;
+
+        localStorage.setItem(CONFIG.cacheKey, JSON.stringify({
+          rates: state.rates,
+          date: state.ratesDate,
+          base: state.ratesBase,
+          timestamp: Date.now(),
+        }));
+        return;
+      } catch (err) {
+        console.warn('[WYRD] Primary rate API failed:', err.message);
+      }
+
+      try {
+        const url = `${CONFIG.fallbackApiBase}/idr.json`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (!data || !data.idr) throw new Error('Invalid fallback payload');
+        const rates = {};
+        Object.keys(data.idr).forEach((code) => {
+          rates[code.toUpperCase()] = data.idr[code];
+        });
+        rates[CONFIG.baseCurrency] = 1;
+        state.rates = rates;
+        state.ratesDate = data.date || new Date().toISOString().slice(0, 10);
+        state.ratesBase = CONFIG.baseCurrency;
+        state.rateFetchError = false;
+
+        localStorage.setItem(CONFIG.cacheKey, JSON.stringify({
+          rates: state.rates,
+          date: state.ratesDate,
+          base: state.ratesBase,
+          timestamp: Date.now(),
+        }));
+      } catch (err) {
+        console.warn('[WYRD] Fallback rate API failed:', err.message);
+        state.rateFetchError = true;
+        if (cachedRaw) {
+          try {
+            const cached = JSON.parse(cachedRaw);
+            if (cached && cached.rates) {
+              state.rates = cached.rates;
+              state.ratesDate = cached.date;
+              state.ratesBase = cached.base || CONFIG.baseCurrency;
+            }
+          } catch { /* ignore */ }
+        }
+      }
+    }
+
+    /* ==========================================================
+       RENDER PRICES
+       ========================================================== */
+    function renderProductPrices() {
+      $$('.product-row__price').forEach((el) => {
+        const row = el.closest('.product-row');
+        const key = row && row.dataset.product;
+        const product = PRODUCTS[key];
+        if (!product) return;
+
+        const basePrice = product.priceIDR;
+        const converted = convertFromIDR(basePrice, state.currency);
+
+        el.textContent = converted === null
+          ? formatCurrency(basePrice, 'IDR')
+          : formatCurrency(converted, state.currency);
+
+        const oldSmall = el.querySelector('small');
+        if (oldSmall) oldSmall.remove();
+        if (state.currency !== 'IDR' && converted !== null) {
+          const note = document.createElement('small');
+          note.textContent = `(${formatCurrency(basePrice, 'IDR')})`;
+          el.appendChild(note);
+        }
+      });
+    }
+
+    /* ==========================================================
+       RENDER PROMO BADGES
+       ========================================================== */
+    function renderPromoBadges() {
+      Object.entries(PRODUCTS).forEach(([key, product]) => {
+        const badge = $(`[data-promo="${key}"]`);
+        const expiry = $(`[data-expiry="${key}"]`);
+        const countdown = $(`[data-countdown="${key}"]`);
+        if (!badge) return;
+
+        if (isPromoActive(product)) {
+          badge.hidden = false;
+          badge.innerHTML = '';
+          const icon = document.createElement('i');
+          icon.setAttribute('data-lucide', 'zap');
+          badge.appendChild(icon);
+          badge.appendChild(document.createTextNode(` ${product.promo.label}`));
+
+          if (expiry) {
+            expiry.hidden = false;
+            const dateSpan = expiry.querySelector('span:not(.promo-countdown)');
+            if (dateSpan) {
+              dateSpan.textContent = `Ends ${formatDateShort(product.promo.endDate)}`;
+            }
+            if (countdown) {
+              updateCountdown(countdown, product.promo.endDate);
+            }
+          }
+        } else {
+          badge.hidden = true;
+          if (expiry) expiry.hidden = true;
+        }
+      });
+
+      if (window.lucide) lucide.createIcons({ attrs: { class: 'lucide' } });
+    }
+
+    function updateCountdown(el, endDateISO) {
+      const end = new Date(endDateISO).getTime();
+      const diff = end - Date.now();
+      if (diff <= 0) {
+        el.textContent = 'Ended';
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      if (days > 0) el.textContent = `${days}d ${hours}h left`;
+      else if (hours > 0) el.textContent = `${hours}h ${mins}m left`;
+      else el.textContent = `${mins}m left`;
+    }
+
+    setInterval(() => {
+      Object.entries(PRODUCTS).forEach(([key, product]) => {
+        if (isPromoActive(product)) {
+          const cd = $(`[data-countdown="${key}"]`);
+          if (cd) updateCountdown(cd, product.promo.endDate);
+        }
+      });
+    }, 60000);
+
+    /* ==========================================================
+       RENDER CURRENCY LIST
+       ========================================================== */
+    function renderCurrencyList() {
+      const container = $('#currencyList');
+      const query = state.searchQuery.trim().toLowerCase();
+
+      if (!state.rates) {
+        container.innerHTML = `
+          <div class="skeleton-row"><div class="skeleton-row__circle"></div>
+            <div class="skeleton-row__lines">
+              <div class="skeleton-row__line"></div>
+              <div class="skeleton-row__line skeleton-row__line--short"></div>
+            </div>
+          </div>
+          <div class="skeleton-row"><div class="skeleton-row__circle"></div>
+            <div class="skeleton-row__lines">
+              <div class="skeleton-row__line"></div>
+              <div class="skeleton-row__line skeleton-row__line--short"></div>
+            </div>
+          </div>
+          <div class="skeleton-row"><div class="skeleton-row__circle"></div>
+            <div class="skeleton-row__lines">
+              <div class="skeleton-row__line"></div>
+              <div class="skeleton-row__line skeleton-row__line--short"></div>
+            </div>
+          </div>`;
+        return;
+      }
+
+      const filtered = CURRENCY_META.filter((c) => {
+        if (!query) return true;
+        return (
+          c.code.toLowerCase().includes(query) ||
+          c.name.toLowerCase().includes(query)
+        );
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="padding:32px 16px;text-align:center;color:var(--text-tertiary);font-size:.8125rem;">
+            No currencies match "${escapeHTML(state.searchQuery)}".
+          </div>`;
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      filtered.forEach((meta) => {
+        const rate = meta.code === CONFIG.baseCurrency ? 1 : state.rates[meta.code];
+        const hasRate = typeof rate === 'number';
+
+        const row = document.createElement('div');
+        row.className = 'currency-option' + (meta.code === state.currency ? ' is-selected' : '');
+        row.setAttribute('role', 'option');
+        row.setAttribute('aria-selected', meta.code === state.currency ? 'true' : 'false');
+        row.tabIndex = 0;
+        row.dataset.code = meta.code;
+
+        row.innerHTML = `
+          <span class="currency-option__flag">${meta.flag}</span>
+          <span class="currency-option__code">${meta.code}</span>
+          <span class="currency-option__name">${meta.name}</span>
+          <span class="currency-option__rate">${hasRate && meta.code !== CONFIG.baseCurrency ? formatCompact(rate, meta.code) : ''}</span>
+          <i data-lucide="check" class="currency-option__check"></i>
+        `;
+
+        row.addEventListener('click', () => selectCurrency(meta.code));
+        row.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectCurrency(meta.code);
+          }
+        });
+
+        fragment.appendChild(row);
+      });
+
+      container.innerHTML = '';
+      container.appendChild(fragment);
+
+      if (window.lucide) lucide.createIcons({ attrs: { class: 'lucide' } });
+
+      const ref = $('#rateRef');
+      const refVal = $('#rateRefValue');
+      const refSub = $('#rateRefSub');
+      if (state.rates && state.currency !== CONFIG.baseCurrency) {
+        const rate = state.rates[state.currency];
+        if (typeof rate === 'number') {
+          ref.style.display = '';
+          refVal.textContent = `1 IDR = ${rate.toFixed(6)} ${state.currency}`;
+          refSub.textContent = `Updated ${state.ratesDate || '—'} · Source: Open ER-API`;
+        } else {
+          ref.style.display = 'none';
+        }
+      } else {
+        ref.style.display = 'none';
+      }
+    }
+
+    function selectCurrency(code) {
+      state.currency = code;
+      localStorage.setItem(CONFIG.cacheKey + ':currency', code);
+      renderProductPrices();
+      renderCurrencyList();
+      updateHeaderIndicators();
+      closeCurrencyDialog();
+      showToast(t('currency_set', { code }));
+    }
+
+    function openCurrencyDialog() {
+      const overlay = $('#currencyDialog');
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      $('#currencySearch').value = '';
+      state.searchQuery = '';
+      updateRateStatus();
+      renderCurrencyList();
+      setTimeout(() => {
+        const input = $('#currencySearch');
+        if (input) input.focus();
+      }, 320);
+    }
+
+    function closeCurrencyDialog() {
+      $('#currencyDialog').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function updateRateStatus() {
+      const el = $('#rateStatus');
+      const text = $('#rateStatusText');
+      const dot = el.querySelector('.dialog-status__dot');
+      const refreshIcon = el.querySelector('[data-lucide="refresh-cw"]');
+
+      el.classList.remove('is-live', 'is-error');
+
+      if (state.rateFetchError && !state.rates) {
+        el.classList.add('is-error');
+        if (dot) dot.style.display = 'none';
+        if (refreshIcon) refreshIcon.style.display = '';
+        text.textContent = 'Unable to load live rates. Using IDR fallback.';
+      } else if (state.rates) {
+        el.classList.add('is-live');
+        if (dot) dot.style.display = '';
+        if (refreshIcon) refreshIcon.style.display = 'none';
+        text.textContent = `Live rates loaded · ${state.ratesDate || 'latest'}`;
+      } else {
+        if (dot) dot.style.display = '';
+        if (refreshIcon) refreshIcon.style.display = 'none';
+        text.textContent = 'Fetching live rates...';
+      }
+
+      if (window.lucide) lucide.createIcons({ attrs: { class: 'lucide' } });
+    }
+
+    /* ==========================================================
+       LANGUAGE LIST
+       ========================================================== */
+    function buildLanguageList() {
+      const container = $('#languageList');
+      if (!container) return;
+
+      container.innerHTML = LANGUAGES.map((lang) => `
+        <div class="lang-option" data-lang="${lang.code}" role="option" tabindex="0">
+          <span class="lang-option__flag">${lang.flag}</span>
+          <span class="lang-option__name">${lang.name}</span>
+          <span class="lang-option__code">${lang.code.toUpperCase()}</span>
+          <i data-lucide="check" class="lang-option__check"></i>
+        </div>
+      `).join('');
+
+      $$('.lang-option').forEach((opt) => {
+        opt.addEventListener('click', () => selectLanguage(opt.dataset.lang));
+        opt.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectLanguage(opt.dataset.lang);
+          }
+        });
+      });
+
+      if (window.lucide) lucide.createIcons({ attrs: { class: 'lucide' } });
+    }
+
+    function renderLanguageList() {
+      const options = $$('.lang-option');
+      options.forEach((opt) => {
+        const lang = opt.dataset.lang;
+        opt.classList.toggle('is-selected', lang === state.lang);
+        opt.setAttribute('aria-selected', lang === state.lang ? 'true' : 'false');
+      });
+      if (window.lucide) lucide.createIcons({ attrs: { class: 'lucide' } });
+    }
+
+    function selectLanguage(lang) {
+      if (!TRANSLATIONS[lang]) return;
+      state.lang = lang;
+      localStorage.setItem(CONFIG.localeKey, lang);
+      applyTranslations();
+      renderPromoBadges();
+      renderProductPrices();
+      renderCurrencyList();
+      renderLanguageList();
+      updateHeaderIndicators();
+      closeLanguageDialog();
+      const meta = LANGUAGES.find((l) => l.code === lang);
+      showToast(t('language_set', { lang: meta ? meta.name : lang.toUpperCase() }));
+    }
+
+    function openLanguageDialog() {
+      const overlay = $('#languageDialog');
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      renderLanguageList();
+      // Scroll selected into view
+      setTimeout(() => {
+        const selected = $('.lang-option.is-selected');
+        if (selected) selected.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }, 350);
+    }
+
+    function closeLanguageDialog() {
+      $('#languageDialog').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    /* ==========================================================
+       PURCHASE
+       ========================================================== */
+    function openPurchaseModal(productKey) {
+      const product = PRODUCTS[productKey];
+      if (!product) return;
+      state.activeProductKey = productKey;
+
+      const iconEl = $('#purchaseIcon');
+      iconEl.src = product.icon;
+      iconEl.style.display = '';
+      iconEl.alt = product.name;
+
+      $('#purchaseTitle').textContent = t('purchase_title');
+      $('#purchaseProductName').textContent = product.name;
+
+      const converted = convertFromIDR(product.priceIDR, state.currency);
+      const priceEl = $('#purchasePrice');
+      priceEl.textContent = converted === null
+        ? formatCurrency(product.priceIDR, 'IDR')
+        : formatCurrency(converted, state.currency);
+
+      const nameInput = $('#buyerName');
+      nameInput.value = '';
+      $('#btnConfirmPurchase').disabled = true;
+
+      const overlay = $('#purchaseOverlay');
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => nameInput.focus(), 320);
+    }
+
+    function closePurchaseModal() {
+      $('#purchaseOverlay').classList.remove('is-open');
+      document.body.style.overflow = '';
+      state.activeProductKey = null;
+    }
+
+    function buildWhatsAppURL(productKey, buyerName) {
+      const product = PRODUCTS[productKey];
+      if (!product) return null;
+
+      let priceText;
+      if (state.currency === CONFIG.baseCurrency) {
+        priceText = formatCurrency(product.priceIDR, 'IDR');
+      } else {
+        const converted = convertFromIDR(product.priceIDR, state.currency);
+        priceText = converted !== null
+          ? `${formatCurrency(converted, state.currency)} (${formatCurrency(product.priceIDR, 'IDR')})`
+          : formatCurrency(product.priceIDR, 'IDR');
+      }
+
+      const message = `Saya ${buyerName}, ingin membeli ${product.name} ${priceText}`;
+      return `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+    }
+
+    function confirmPurchase() {
+      const nameInput = $('#buyerName');
+      const buyerName = nameInput.value.trim();
+
+      if (!buyerName) {
+        nameInput.focus();
+        showToast(t('name_required'), 'alert-circle');
+        return;
+      }
+
+      if (!state.activeProductKey) return;
+
+      const url = buildWhatsAppURL(state.activeProductKey, buyerName);
+      if (!url) {
+        showToast('Something went wrong', 'alert-circle');
+        return;
+      }
+
+      window.open(url, '_blank', 'noopener,noreferrer');
+      closePurchaseModal();
+      showToast(t('redirect_wa'), 'message-circle');
+    }
+
+    /* ==========================================================
+       PARTICLE BACKGROUND
+       ========================================================== */
+    function initParticles() {
+      const canvas = $('#particle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      let width = 0, height = 0;
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let particles = [];
+      let animationId = null;
+      let mouse = { x: -9999, y: -9999 };
+
+      const PARTICLE_COUNT = (() => {
+        const area = window.innerWidth * window.innerHeight;
+        const base = Math.floor(area / 22000);
+        return Math.min(Math.max(base, 28), 90);
+      })();
+
+      const LINK_DISTANCE = 130;
+      const MOUSE_RADIUS = 140;
+
+      function resize() {
+        width = canvas.clientWidth;
+        height = canvas.clientHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function createParticle() {
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          r: Math.random() * 1.6 + 0.8,
+          alpha: Math.random() * 0.45 + 0.2,
+        };
+      }
+
+      function seed() {
+        particles = [];
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+          particles.push(createParticle());
+        }
+      }
+
+      function step() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < -10) p.x = width + 10;
+          if (p.x > width + 10) p.x = -10;
+          if (p.y < -10) p.y = height + 10;
+          if (p.y > height + 10) p.y = -10;
+
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MOUSE_RADIUS && dist > 0.1) {
+            const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+            p.x += (dx / dist) * force * 1.2;
+            p.y += (dy / dist) * force * 1.2;
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(217, 79, 100, ${p.alpha})`;
+          ctx.fill();
+        }
+
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const a = particles[i], b = particles[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < LINK_DISTANCE) {
+              const opacity = (1 - dist / LINK_DISTANCE) * 0.22;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = `rgba(184, 50, 72, ${opacity})`;
+              ctx.lineWidth = 0.7;
+              ctx.stroke();
+            }
+          }
+        }
+
+        animationId = requestAnimationFrame(step);
+      }
+
+      function start() {
+        if (animationId) return;
+        seed();
+        step();
+      }
+
+      function stop() {
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+          animationId = null;
+        }
+      }
+
+      const onResize = debounce(() => { resize(); seed(); }, 200);
+      window.addEventListener('resize', onResize);
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop(); else start();
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      }, { passive: true });
+
+      window.addEventListener('mouseleave', () => {
+        mouse.x = -9999;
+        mouse.y = -9999;
+      });
+
+      resize();
+      start();
+    }
+
+    /* ==========================================================
+       EVENT BINDING
+       ========================================================== */
+    function bindEvents() {
+      // Currency dialog
+      $('#btnCurrency').addEventListener('click', openCurrencyDialog);
+      $('#btnCloseCurrency').addEventListener('click', closeCurrencyDialog);
+      $('#currencyDialog').addEventListener('click', (e) => {
+        if (e.target === $('#currencyDialog')) closeCurrencyDialog();
+      });
+
+      const searchInput = $('#currencySearch');
+      searchInput.addEventListener('input', debounce((e) => {
+        state.searchQuery = e.target.value;
+        renderCurrencyList();
+      }, 120));
+
+      // Language dialog
+      $('#btnLanguage').addEventListener('click', openLanguageDialog);
+      $('#btnCloseLanguage').addEventListener('click', closeLanguageDialog);
+      $('#languageDialog').addEventListener('click', (e) => {
+        if (e.target === $('#languageDialog')) closeLanguageDialog();
+      });
+
+      // Product rows
+      $$('.product-row').forEach((row) => {
+        const key = row.dataset.product;
+        if (!key) return;
+        row.addEventListener('click', () => openPurchaseModal(key));
+        row.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openPurchaseModal(key);
+          }
+        });
+      });
+
+      // Purchase modal
+      $('#btnCancelPurchase').addEventListener('click', closePurchaseModal);
+      $('#purchaseOverlay').addEventListener('click', (e) => {
+        if (e.target === $('#purchaseOverlay')) closePurchaseModal();
+      });
+
+      const nameInput = $('#buyerName');
+      const confirmBtn = $('#btnConfirmPurchase');
+
+      nameInput.addEventListener('input', () => {
+        confirmBtn.disabled = nameInput.value.trim().length === 0;
+      });
+
+      nameInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !confirmBtn.disabled) confirmPurchase();
+      });
+
+      confirmBtn.addEventListener('click', confirmPurchase);
+
+      // Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if ($('#currencyDialog').classList.contains('is-open')) closeCurrencyDialog();
+          if ($('#languageDialog').classList.contains('is-open')) closeLanguageDialog();
+          if ($('#purchaseOverlay').classList.contains('is-open')) closePurchaseModal();
+        }
+      });
+    }
+
+    /* ==========================================================
+       INIT
+       ========================================================== */
+    async function init() {
+      if (window.lucide) lucide.createIcons({ attrs: { class: 'lucide' } });
+
+      applyTranslations();
+      buildLanguageList();
+      renderLanguageList();
+      renderPromoBadges();
+      updateHeaderIndicators();
+      bindEvents();
+      initParticles();
+
+      await fetchRates();
+
+      renderProductPrices();
+      renderPromoBadges();
+
+      if ($('#currencyDialog').classList.contains('is-open')) {
+        updateRateStatus();
+        renderCurrencyList();
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    window.__WYRD__ = { state, PRODUCTS, CONFIG, LANGUAGES };
+  })();
+  </script>
+
+</body>
+</html>
